@@ -1,7 +1,5 @@
 package com.boot.admin.domain.repository.page;
 
-import com.boot.admin.domain.Specification;
-
 import java.util.Set;
 
 /**

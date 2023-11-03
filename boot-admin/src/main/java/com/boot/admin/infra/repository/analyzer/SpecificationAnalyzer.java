@@ -1,8 +1,8 @@
 package com.boot.admin.infra.repository.analyzer;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.boot.admin.domain.Specification;
-import com.boot.admin.domain.Specification.Operator;
+import com.boot.admin.domain.repository.page.Specification;
+import com.boot.admin.domain.repository.page.Specification.Operator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -17,9 +17,6 @@ import java.time.LocalDateTime;
 @Setter
 public class UserDto {
 
-    /**
-     * 表id
-     */
     private Serializable id;
     /**
      * 用户名

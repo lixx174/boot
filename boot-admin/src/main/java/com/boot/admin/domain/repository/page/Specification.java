@@ -1,10 +1,12 @@
-package com.boot.admin.domain;
+package com.boot.admin.domain.repository.page;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
+ * FIXME 抽象一层接口 提供一个反射实现方式
+ *
  * @author Jinx
  */
 @Getter

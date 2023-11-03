@@ -1,7 +1,8 @@
 package com.boot.admin.application;
 
-import com.boot.admin.domain.Specification;
+import com.boot.admin.domain.repository.page.Specification;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import java.util.Set;
  * @author jinx
  */
 @Getter
+@Setter
 public class PageQuery {
 
     /**

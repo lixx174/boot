@@ -10,6 +10,7 @@ import com.boot.admin.application.dto.query.UserPageQuery;
 import com.boot.admin.application.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -48,7 +49,7 @@ public class UserController {
      * 详情
      *
      * @param id 用户id
-     * @return 用户信息
+     * @return 用户详细信息
      */
     @GetMapping
     public Result<UserDto> detail(Serializable id) {
@@ -85,8 +86,8 @@ public class UserController {
      * @param ids 用户id数组
      * @return void
      */
-    @PutMapping
-    public Result<Void> modify(@RequestBody Set<Serializable> ids) {
+    @DeleteMapping
+    public Result<Void> remove(@RequestBody Set<Serializable> ids) {
         service.remove(ids);
         return Result.ok();
     }

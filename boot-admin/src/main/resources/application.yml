@@ -13,6 +13,9 @@ spring:
     username: root
     password: root
 
+mybatis-plus:
+  mapper-locations: classpath:mapper/**
+
 logging:
   level:
     org.springframework.security: trace

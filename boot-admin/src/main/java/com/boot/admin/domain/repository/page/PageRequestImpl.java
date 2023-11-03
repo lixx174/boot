@@ -1,6 +1,5 @@
 package com.boot.admin.domain.repository.page;
 
-import com.boot.admin.domain.Specification;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

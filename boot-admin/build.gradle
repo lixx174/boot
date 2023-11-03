@@ -2,7 +2,7 @@ compileJava {
     options.compilerArgs += [
             '-Amapstruct.suppressGeneratorTimestamp=true',
             '-Amapstruct.suppressGeneratorVersionInfoComment=true',
-            '-Amapstruct.verbose=true',
+            '-Amapstruct.verbose=false',
             '-Amapstruct.defaultComponentModel=spring'
     ]
 }
