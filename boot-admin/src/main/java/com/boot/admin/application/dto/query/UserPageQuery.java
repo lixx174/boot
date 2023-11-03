@@ -1,8 +1,8 @@
 package com.boot.admin.application.dto.query;
 
 import com.boot.admin.application.PageQuery;
-import com.boot.admin.domain.enums.Sex;
 import com.boot.admin.domain.Specification;
+import com.boot.admin.domain.enums.Sex;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.StringUtils;

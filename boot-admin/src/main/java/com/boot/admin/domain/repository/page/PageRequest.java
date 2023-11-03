@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * @author jinx
  */
-public interface PageRequest{
+public interface PageRequest {
     Number getCurrent();
 
     Number getSize();

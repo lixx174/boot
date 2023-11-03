@@ -32,7 +32,7 @@ public class DefaultUserRepository implements UserRepository {
     @Override
     public PageResponse<User> findAll(PageRequest pageRequest) {
         Page<UserDo> page = mapper.selectPage(
-                Page.of(pageRequest.getCurrent().longValue(),  pageRequest.getSize().longValue()),
+                Page.of(pageRequest.getCurrent().longValue(), pageRequest.getSize().longValue()),
                 analyzer.analyze(pageRequest.getSpecifications(), Wrappers.query(UserDo.class))
         );
 
@@ -48,9 +48,9 @@ public class DefaultUserRepository implements UserRepository {
     public void save(User user) {
         UserDo userDo = converter.convert(user);
 
-        if(user.getId() == null){
+        if (user.getId() == null) {
             mapper.insert(userDo);
-        }else {
+        } else {
             mapper.updateById(userDo);
         }
     }

@@ -39,11 +39,8 @@ public class SpecificationAnalyzer {
             }
         };
 
-        private final Operator operator;
-
         private static final MybatisOperator[] VALUES = values();
-
-        abstract void analyze(Specification specification, QueryWrapper<?> wrapper);
+        private final Operator operator;
 
         static MybatisOperator loadByOperator(Operator operator) {
             for (MybatisOperator mybatisOperator : VALUES) {
@@ -54,5 +51,7 @@ public class SpecificationAnalyzer {
 
             throw new IllegalArgumentException("illegal operator [%s]".formatted(operator));
         }
+
+        abstract void analyze(Specification specification, QueryWrapper<?> wrapper);
     }
 }

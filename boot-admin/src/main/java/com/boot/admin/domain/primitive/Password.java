@@ -15,7 +15,7 @@ public class Password {
     private String value;
 
 
-    public boolean matches(Password password){
+    public boolean matches(Password password) {
         return value.equals(password.getValue());
     }
 }
