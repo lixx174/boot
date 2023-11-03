@@ -22,9 +22,10 @@ application：应用层，负责业务编排（只会依赖到domain层）
         - event：事件请求模型
 domain：领域层，具体的业务处理（不依赖任何层）
     - enums：枚举
-    - primitive：原始领域
+    - primitive：原始领域（可复用的模型）
     - repository：仓储定义
         - page：分页模型
+    - service：领域服务    
 infra：底层实现，根据依赖倒转原则将其作为顶层（它可以依赖其他任何层）
     - config：项目配置
     - exception：控制器全局异常处理器
