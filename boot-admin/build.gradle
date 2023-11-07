@@ -10,8 +10,8 @@ compileJava {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation libs.mapstruct
-    implementation libs.mybatis.plus.boot.starter
+    implementation libs.mapstruct.core
+    implementation libs.mp.starter
 
     runtimeOnly 'com.mysql:mysql-connector-j'
 

@@ -1,12 +1,11 @@
 rootProject.name = 'boot'
 include 'boot-admin'
 
+
 dependencyResolutionManagement {
     versionCatalogs {
         libs {
-            library('mapstruct', 'org.mapstruct:mapstruct:1.5.5.Final')
-            library('mapstruct-processor', 'org.mapstruct:mapstruct-processor:1.5.5.Final')
-            library('mybatis-plus-boot-starter', 'com.baomidou:mybatis-plus-boot-starter:3.5.4')
+            from(files("libs.versions.toml"))
         }
     }
 }

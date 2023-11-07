@@ -1,0 +1,12 @@
+[versions]
+#申明版本
+
+[libraries]
+mapstruct-core = "org.mapstruct:mapstruct:1.5.5.Final"
+mapstruct-processor = "org.mapstruct:mapstruct-processor:1.5.5.Final"
+mp-starter = "com.baomidou:mybatis-plus-boot-starter:3.5.4"
+
+[bundles]
+#组合多个依赖为一个依赖
+
+[plugins]
