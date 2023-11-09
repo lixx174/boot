@@ -1,4 +1,4 @@
-package com.boot.admin.infra.exception;
+package com.boot.admin.domain.excption;
 
 /**
  * 参数正常但是无法通过业务的异常

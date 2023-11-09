@@ -2,9 +2,9 @@ package com.boot.admin.domain;
 
 import com.boot.admin.domain.enums.Sex;
 import com.boot.admin.domain.enums.UserStatus;
+import com.boot.admin.domain.excption.UnprocessableException;
 import com.boot.admin.domain.primitive.Mobile;
 import com.boot.admin.domain.primitive.Password;
-import com.boot.admin.infra.exception.UnprocessableException;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,6 +1,7 @@
 package com.boot.admin.infra.exception;
 
 import com.boot.admin.application.Result;
+import com.boot.admin.domain.excption.UnprocessableException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
