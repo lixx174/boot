@@ -7,13 +7,13 @@ import com.boot.admin.application.dto.command.UserModifyCommand;
 import com.boot.admin.application.dto.command.UserOfferCommand;
 import com.boot.admin.application.dto.command.UserPasswordModifyCommand;
 import com.boot.admin.application.dto.query.UserPageQuery;
-import com.boot.admin.domain.repository.page.Specification;
 import com.boot.admin.domain.User;
 import com.boot.admin.domain.primitive.Password;
 import com.boot.admin.domain.repository.UserRepository;
 import com.boot.admin.domain.repository.page.PageRequest;
 import com.boot.admin.domain.repository.page.PageRequestImpl;
 import com.boot.admin.domain.repository.page.PageResponse;
+import com.boot.admin.domain.repository.page.Specification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

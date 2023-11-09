@@ -73,6 +73,9 @@ public class DefaultRoleRepository implements RoleRepository {
         mapper.deleteBatchIds(ids);
     }
 
+    /**
+     * TODO 内部类 MybatisX插件无法跳转
+     */
     @Mapper
     public interface RoleMapper extends BaseMapper<RoleDo> {
 

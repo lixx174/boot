@@ -11,6 +11,12 @@ import java.util.stream.Collectors;
 @Setter
 public class Role {
 
+    private Integer id;
+    private String name;
+    private String remark;
+    private LocalDateTime createAt = LocalDateTime.now();
+    private Set<Resource> resources;
+
     public Role(String name, String remark, Set<Integer> resources) {
         this.name = name;
         this.remark = remark;
@@ -18,16 +24,6 @@ public class Role {
                 Set.of() :
                 resources.stream().map(Resource::new).collect(Collectors.toSet());
     }
-
-    private Integer id;
-
-    private String name;
-
-    private String remark;
-
-    private LocalDateTime createAt = LocalDateTime.now();
-
-    private Set<Resource> resources;
 
     public boolean hasResource() {
         return !resources.isEmpty();

@@ -15,6 +15,16 @@ import java.util.stream.Collectors;
 @Setter
 public class Resource {
 
+    private Integer id;
+    private Resource parent;
+    private String name;
+    private String permission;
+    private String uri;
+    private String icon;
+    private ResourceType type;
+    private LocalDateTime createAt = LocalDateTime.now();
+    private List<Resource> children = new ArrayList<>();
+
     Resource(Integer id) {
         this.id = id;
     }
@@ -38,35 +48,15 @@ public class Resource {
         this.icon = icon;
     }
 
-    private Integer id;
-
-    private Resource parent;
-
-    private String name;
-
-    private String permission;
-
-    private String uri;
-
-    private String icon;
-
-    private ResourceType type;
-
-    private LocalDateTime createAt = LocalDateTime.now();
-
-    private List<Resource> children = new ArrayList<>();
-
-
     public static class ResourceTreeBuilder {
+
+        private final Resource root;
+        private final Map<Integer, List<Resource>> groups;
 
         private ResourceTreeBuilder(List<Resource> resources) {
             root = new Resource(0);
             groups = resources.stream().collect(Collectors.groupingBy(resource -> resource.getParent().getId()));
         }
-
-        private final Resource root;
-        private final Map<Integer, List<Resource>> groups;
-
 
         public static ResourceTreeBuilder from(List<Resource> resources) {
             return new ResourceTreeBuilder(resources == null ? Collections.emptyList() : resources);

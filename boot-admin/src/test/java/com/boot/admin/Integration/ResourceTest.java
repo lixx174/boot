@@ -16,24 +16,23 @@ import java.util.UUID;
 @SpringBootTest
 public class ResourceTest {
 
+    private final Random random = new Random();
     @Autowired
     private ResourceController controller;
-    private final Random random = new Random();
-
 
     @Test
-    public void script(){
+    public void script() {
         for (int i = 0; i < 1000; i++) {
             ResourceOfferCommand command = new ResourceOfferCommand();
 
             command.setPid(random.nextInt(1000));
             command.setName(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8));
             command.setPermission(UUID.randomUUID().toString());
-            if(random.nextBoolean()){
+            if (random.nextBoolean()) {
                 command.setType(ResourceType.ROUTE);
                 command.setUri(UUID.randomUUID().toString());
                 command.setIcon(UUID.randomUUID().toString());
-            }else {
+            } else {
                 command.setType(ResourceType.BUTTON);
             }
 

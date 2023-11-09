@@ -12,6 +12,7 @@ public class PageResponseImpl<T> implements PageResponse<T> {
 
     private final Number pages;
     private final List<T> contents;
+
     public PageResponseImpl(Number pages, List<T> contents) {
         this.pages = pages;
         this.contents = contents;
