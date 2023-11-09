@@ -19,7 +19,9 @@ public interface ResourceRepository {
 
     Resource findById(Serializable id);
 
+    List<Resource> findByIds(Set<Integer> ids);
+
     void save(Resource resource);
 
-    void removeAllById(Set<Serializable> ids);
+    void removeAllById(Set<Integer> ids);
 }

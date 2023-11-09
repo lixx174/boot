@@ -1,9 +1,10 @@
 package com.boot.admin.application.service;
 
 import com.boot.admin.application.PageReply;
-import com.boot.admin.application.Result;
 import com.boot.admin.application.assembler.ResourceAssembler;
 import com.boot.admin.application.dto.ResourceDto;
+import com.boot.admin.application.dto.command.ResourceModifyCommand;
+import com.boot.admin.application.dto.command.ResourceOfferCommand;
 import com.boot.admin.application.dto.query.ResourcePageQuery;
 import com.boot.admin.domain.Resource;
 import com.boot.admin.domain.repository.ResourceRepository;
@@ -14,7 +15,7 @@ import com.boot.admin.domain.repository.page.Specification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Jinx
@@ -37,11 +38,32 @@ public class ResourceService {
 
         return PageReply.of(
                 pageRequest.getCurrent(), pageRequest.getSize(),
-                pageResponse.getPages(), assembler.assemble(pageResponse.getContents())
+                pageResponse.getPages(), assembler.assembleForPage(pageResponse.getContents())
         );
     }
 
-    public List<ResourceDto> tree() {
-        return assembler.assemble(repo.findAll());
+
+    public ResourceDto detail(Integer id) {
+        return assembler.assembleForDetail(repo.findById(id));
+    }
+
+    public void offer(ResourceOfferCommand command) {
+        repo.save(assembler.assemble(command));
+    }
+
+    public void modify(ResourceModifyCommand command) {
+        repo.save(assembler.assemble(command));
+    }
+
+    public void remove(Set<Integer> ids) {
+        repo.removeAllById(ids);
+    }
+
+    public ResourceDto tree() {
+        Resource root = Resource.ResourceTreeBuilder
+                .from(repo.findAll())
+                .build();
+
+        return assembler.assembleForTree(root);
     }
 }

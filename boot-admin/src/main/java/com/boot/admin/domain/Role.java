@@ -1,6 +1,5 @@
 package com.boot.admin.domain;
 
-import com.boot.admin.domain.primitive.ResourceId;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,13 +11,12 @@ import java.util.stream.Collectors;
 @Setter
 public class Role {
 
-    public Role(String name, String remark, Set<Integer> resourceIds) {
+    public Role(String name, String remark, Set<Integer> resources) {
         this.name = name;
         this.remark = remark;
-        this.resourceIds = resourceIds == null ? Set.of() :
-                resourceIds.stream()
-                        .map(ResourceId::new)
-                        .collect(Collectors.toSet());
+        this.resources = resources == null ?
+                Set.of() :
+                resources.stream().map(Resource::new).collect(Collectors.toSet());
     }
 
     private Integer id;
@@ -29,15 +27,9 @@ public class Role {
 
     private LocalDateTime createAt = LocalDateTime.now();
 
-    private Set<ResourceId> resourceIds;
+    private Set<Resource> resources;
 
     public boolean hasResource() {
-        return !resourceIds.isEmpty();
-    }
-
-    public Set<Integer> getPrimitiveResourceIds() {
-        return resourceIds.stream()
-                .map(ResourceId::getValue)
-                .collect(Collectors.toSet());
+        return !resources.isEmpty();
     }
 }

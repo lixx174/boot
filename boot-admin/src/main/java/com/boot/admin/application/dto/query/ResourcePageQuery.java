@@ -25,7 +25,7 @@ public class ResourcePageQuery extends PageQuery {
      */
     private String name;
     /**
-     * 手机号
+     * BUTTON 菜单 | ROUTE 路由
      */
     private ResourceType type;
 

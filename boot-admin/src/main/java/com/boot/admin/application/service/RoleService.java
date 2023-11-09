@@ -3,6 +3,7 @@ package com.boot.admin.application.service;
 import com.boot.admin.application.PageReply;
 import com.boot.admin.application.assembler.RoleAssembler;
 import com.boot.admin.application.dto.RoleDto;
+import com.boot.admin.application.dto.command.RoleModifyCommand;
 import com.boot.admin.application.dto.command.RoleOfferCommand;
 import com.boot.admin.application.dto.query.RolePageQuery;
 import com.boot.admin.domain.Role;
@@ -13,8 +14,6 @@ import com.boot.admin.domain.repository.page.PageResponse;
 import com.boot.admin.domain.repository.page.Specification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
 
 /**
  * @author Jinx
@@ -41,18 +40,15 @@ public class RoleService {
         );
     }
 
-
-    public RoleDto detail(Serializable id) {
-        return assembler.assemble(repo.findById(id));
+    public RoleDto detail(Integer id) {
+        return assembler.assembleForDetail(repo.findById(id));
     }
 
     public void offer(RoleOfferCommand command) {
-        Role role = new Role(
-                command.getName(),
-                command.getRemark(),
-                command.getResourceIds()
-        );
+        repo.save(assembler.assemble(command));
+    }
 
-        repo.save(role);
+    public void modify(RoleModifyCommand command) {
+        repo.save(assembler.assemble(command));
     }
 }

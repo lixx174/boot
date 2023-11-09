@@ -1,7 +1,7 @@
 package com.boot.admin.infra.repository.converter;
 
 import com.boot.admin.domain.Role;
-import com.boot.admin.infra.repository.model.RoleDO;
+import com.boot.admin.infra.repository.model.RoleDo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -16,17 +16,13 @@ import java.util.Set;
 public interface RoleConverter {
 
     @Mappings({
-            @Mapping(target = "resourceIds", ignore = true),
-            @Mapping(target = "primitiveResourceIds", ignore = true),
+            @Mapping(target = "resources", ignore = true),
     })
-    Role convert(RoleDO role);
+    Role convert(RoleDo role);
 
-    List<Role> convert(List<RoleDO> roles);
+    List<Role> convert(List<RoleDo> roles);
 
-    RoleDO convert(Role role);
+    Role convert(RoleDo role, Set<Integer> resources);
 
-    @Mappings({
-            @Mapping(target = "primitiveResourceIds", ignore = true),
-    })
-    Role convert(RoleDO role, Set<Integer> resourceIds);
+    RoleDo convert(Role role);
 }

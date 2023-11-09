@@ -10,7 +10,7 @@ import com.boot.admin.domain.repository.page.PageResponse;
 import com.boot.admin.domain.repository.page.PageResponseImpl;
 import com.boot.admin.infra.repository.analyzer.SpecificationAnalyzer;
 import com.boot.admin.infra.repository.converter.ResourceConverter;
-import com.boot.admin.infra.repository.model.ResourceDO;
+import com.boot.admin.infra.repository.model.ResourceDo;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -37,9 +37,9 @@ public class DefaultResourceRepository implements ResourceRepository {
 
     @Override
     public PageResponse<Resource> findAll(PageRequest pageRequest) {
-        Page<ResourceDO> page = mapper.selectPage(
+        Page<ResourceDo> page = mapper.selectPage(
                 Page.of(pageRequest.getCurrent().longValue(), pageRequest.getSize().longValue()),
-                analyzer.analyze(pageRequest.getSpecifications(), Wrappers.query(ResourceDO.class))
+                analyzer.analyze(pageRequest.getSpecifications(), Wrappers.query(ResourceDo.class))
         );
 
         return new PageResponseImpl<>(page.getPages(), converter.convert(page.getRecords()));
@@ -47,21 +47,32 @@ public class DefaultResourceRepository implements ResourceRepository {
 
     @Override
     public Resource findById(Serializable id) {
-        return null;
+        return converter.convert(mapper.selectById(id));
+    }
+
+    @Override
+    public List<Resource> findByIds(Set<Integer> ids) {
+        return converter.convert(mapper.selectBatchIds(ids));
     }
 
     @Override
     public void save(Resource resource) {
+        ResourceDo resourceDo = converter.convert(resource);
 
+        if (resource.getId() == null) {
+            mapper.insert(resourceDo);
+        } else {
+            mapper.updateById(resourceDo);
+        }
     }
 
     @Override
-    public void removeAllById(Set<Serializable> ids) {
+    public void removeAllById(Set<Integer> ids) {
         mapper.deleteBatchIds(ids);
     }
 
     @Mapper
-    public interface ResourceMapper extends BaseMapper<ResourceDO> {
+    public interface ResourceMapper extends BaseMapper<ResourceDo> {
 
     }
 }

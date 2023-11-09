@@ -15,6 +15,9 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mapper/**
+  global-config:
+    db-config:
+      id-type: auto
 
 logging:
   level:

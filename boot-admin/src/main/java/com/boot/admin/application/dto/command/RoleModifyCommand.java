@@ -1,24 +1,28 @@
 package com.boot.admin.application.dto.command;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
 
 /**
- * 用户新增参数
+ * 用户修改参数
  *
  * @author jinx
  */
 @Getter
 @Setter
-public class RoleOfferCommand {
+public class RoleModifyCommand {
 
+    /**
+     * 表id
+     */
+    @NotNull(message = "id不能为空")
+    private Integer id;
     /**
      * 角色名称
      */
-    @NotBlank(message = "角色名称不能为空")
     private String name;
     /**
      * 备注

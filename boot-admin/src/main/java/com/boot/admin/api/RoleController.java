@@ -3,7 +3,7 @@ package com.boot.admin.api;
 import com.boot.admin.application.PageReply;
 import com.boot.admin.application.Result;
 import com.boot.admin.application.dto.RoleDto;
-import com.boot.admin.application.dto.UserDto;
+import com.boot.admin.application.dto.command.RoleModifyCommand;
 import com.boot.admin.application.dto.command.RoleOfferCommand;
 import com.boot.admin.application.dto.query.RolePageQuery;
 import com.boot.admin.application.service.RoleService;
@@ -11,11 +11,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.Serializable;
 
 /**
  * 角色管理
@@ -48,7 +47,7 @@ public class RoleController {
      * @return 角色详细信息
      */
     @GetMapping
-    public Result<RoleDto> detail(Serializable id) {
+    public Result<RoleDto> detail(Integer id) {
         return Result.ok(service.detail(id));
     }
 
@@ -61,6 +60,18 @@ public class RoleController {
     @PostMapping
     public Result<Void> offer(@Valid @RequestBody RoleOfferCommand command) {
         service.offer(command);
+        return Result.ok();
+    }
+
+    /**
+     * 修改
+     *
+     * @param command 修改参数
+     * @return void
+     */
+    @PutMapping
+    public Result<Void> modify(@Valid @RequestBody RoleModifyCommand command) {
+        service.modify(command);
         return Result.ok();
     }
 }

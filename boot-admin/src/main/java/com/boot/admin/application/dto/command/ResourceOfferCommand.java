@@ -1,32 +1,30 @@
-package com.boot.admin.application.dto;
+package com.boot.admin.application.dto.command;
 
 import com.boot.admin.domain.enums.ResourceType;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 资源信息
  */
 @Getter
 @Setter
-public class ResourceDto {
+public class ResourceOfferCommand {
 
-    private Integer id;
     /**
      * 父级资源id
      */
-    private ResourceDto parent;
+    private Integer pid;
     /**
      * 资源名称
      */
+    @NotBlank(message = "资源名称不能为空")
     private String name;
     /**
      * 资源权限值
      */
+    @NotBlank(message = "资源权限值不能为空")
     private String permission;
     /**
      * 路由uri
@@ -40,12 +38,4 @@ public class ResourceDto {
      * BUTTON 菜单 | ROUTE 路由
      */
     private ResourceType type;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createAt;
-    /**
-     * 下级资源
-     */
-    private List<ResourceDto> children = new ArrayList<>();
 }

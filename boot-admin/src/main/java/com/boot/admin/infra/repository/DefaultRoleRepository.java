@@ -3,6 +3,7 @@ package com.boot.admin.infra.repository;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.boot.admin.domain.Resource;
 import com.boot.admin.domain.Role;
 import com.boot.admin.domain.repository.RoleRepository;
 import com.boot.admin.domain.repository.page.PageRequest;
@@ -10,13 +11,14 @@ import com.boot.admin.domain.repository.page.PageResponse;
 import com.boot.admin.domain.repository.page.PageResponseImpl;
 import com.boot.admin.infra.repository.analyzer.SpecificationAnalyzer;
 import com.boot.admin.infra.repository.converter.RoleConverter;
-import com.boot.admin.infra.repository.model.RoleDO;
+import com.boot.admin.infra.repository.model.RoleDo;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Jinx
@@ -31,9 +33,9 @@ public class DefaultRoleRepository implements RoleRepository {
 
     @Override
     public PageResponse<Role> findAll(PageRequest pageRequest) {
-        Page<RoleDO> page = mapper.selectPage(
+        Page<RoleDo> page = mapper.selectPage(
                 Page.of(pageRequest.getCurrent().longValue(), pageRequest.getSize().longValue()),
-                analyzer.analyze(pageRequest.getSpecifications(), Wrappers.query(RoleDO.class))
+                analyzer.analyze(pageRequest.getSpecifications(), Wrappers.query(RoleDo.class))
         );
 
         return new PageResponseImpl<>(page.getPages(), converter.convert(page.getRecords()));
@@ -41,8 +43,7 @@ public class DefaultRoleRepository implements RoleRepository {
 
     @Override
     public Role findById(Serializable id) {
-        RoleDO roleDO = mapper.selectById(id);
-        // FIXME check null
+        RoleDo roleDO = mapper.selectById(id);
         Set<Integer> resourceIds = mapper.selectResourceIdsById(id);
 
         return converter.convert(roleDO, resourceIds);
@@ -50,16 +51,20 @@ public class DefaultRoleRepository implements RoleRepository {
 
     @Override
     public void save(Role role) {
-        if (role.getId() == null) {
-            RoleDO roleDO = converter.convert(role);
-            mapper.insert(roleDO);
+        RoleDo roleDO = converter.convert(role);
 
-            if (role.hasResource()) {
-                mapper.deleteResourcesById(roleDO.getId());
-                mapper.insertResources(roleDO.getId(), role.getPrimitiveResourceIds());
-            }
+        if (role.getId() == null) {
+            mapper.insert(roleDO);
         } else {
-            // TODO update
+            mapper.updateById(roleDO);
+        }
+
+        if (role.hasResource()) {
+            mapper.deleteResourcesById(roleDO.getId());
+            mapper.insertResources(
+                    roleDO.getId(),
+                    role.getResources().stream().map(Resource::getId).collect(Collectors.toSet())
+            );
         }
     }
 
@@ -69,7 +74,7 @@ public class DefaultRoleRepository implements RoleRepository {
     }
 
     @Mapper
-    public interface RoleMapper extends BaseMapper<RoleDO> {
+    public interface RoleMapper extends BaseMapper<RoleDo> {
 
         Set<Integer> selectResourceIdsById(Serializable id);
 
