@@ -1,9 +1,9 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
   application:
-    name: boot-admin
+    name: boot-authorization
 
   profiles:
     active: dev
@@ -13,13 +13,6 @@ spring:
     username: root
     password: root
 
-mybatis-plus:
-  mapper-locations: classpath:mapper/**
-  global-config:
-    db-config:
-      id-type: auto
-
 logging:
   level:
     org.springframework.security: trace
-    com.boot.admin.infra.repository: debug
